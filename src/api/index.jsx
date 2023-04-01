@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://mytrain-server.cyclic.app/";
 
 export const getPopular = () => axios.get("/api/getPopular");
 export const getStations = () => axios.get("/api/getStations");
