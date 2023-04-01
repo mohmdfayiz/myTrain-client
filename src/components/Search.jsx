@@ -23,9 +23,9 @@ const Search = () => {
 
   return (
     <form onSubmit={handleSearch}>
-      <div className="mt-10 px-[3rem] flex gap-10">
+      <div className="mt-10 flex sm:flex-row flex-col sm:gap-10">
         <DropdownList setState={setSource} placeholder={"Source"} />
-        <img src={Arrow} alt="To" className="h-10 w-10 object-cover " />
+        <img src={Arrow} alt="To" className="h-10 w-10 object-cover sm:block hidden" />
         <DropdownList setState={setDestination} placeholder={"Destination"} />
         <button
           type="submit"

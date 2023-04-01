@@ -19,7 +19,7 @@ const List = () => {
   }, [searchResult, result]);
 
   return (
-    <div className=" flex flex-col gap-2 bg-darkBlue p-5 m-[3rem] min-h-[250px] md:w-8/12 rounded-md">
+    <div className=" flex flex-col gap-2 bg-darkBlue p-5 my-[3rem] min-h-[250px] md:w-8/12 rounded-md">
       <h1 className="font-bold text-xl text-indigo">
         {searchResult.length ? "Available Trains" : "Popular"}
       </h1>
@@ -29,8 +29,8 @@ const List = () => {
 };
 
 const ListItem = ({ item }) => {
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const handleSelect = (train) => {
     dispatch(setData(train));
     dispatch(setShow());
@@ -42,23 +42,23 @@ const ListItem = ({ item }) => {
       className="bg-white p-2 rounded-md hover:shadow-md cursor-pointer"
     >
       <div className="grid grid-cols-12 ">
-        <h1 className="text-md font-bold col-span-3 content-start">
+        <h2 className="text-md font-bold col-span-3">
           {item.name}
-        </h1>
-        <div className="flex justify-center align-middle gap-3 col-span-5">
+        </h2>
+        <div className="flex align-middle gap-3 col-span-5">
           <h3>{item.route[0].stationName}</h3>
           <img src={Arrow} alt="To" className="h-5 w-5" />
           <h3>{item.route[3].stationName}</h3>
         </div>
-        <h2 className="text-md col-span-2">
+        <h3 className="text-md col-span-2">
           {item.route.reduce((acc, cur) => acc + cur.distanceFromPrevious, 0)}{" "}
           KM
-        </h2>
-        <h2 className="text-md col-span-2">
+        </h3>
+        <h3 className="text-md col-span-2">
           ₹
           {item.route.reduce((acc, cur) => acc + cur.distanceFromPrevious, 0) *
             1.25}
-        </h2>
+        </h3>
       </div>
     </div>
   );
