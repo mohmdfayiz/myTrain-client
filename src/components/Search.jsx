@@ -3,7 +3,7 @@ import { getStations, searchTrain } from "../api";
 import useFetch from "../hooks/useFetch";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setSearchResult } from "../redux/slices/trainSlice";
+import { setSearch, setSearchResult } from "../redux/slices/trainSlice";
 
 const Search = () => {
   const [source, setSource] = useState("");
@@ -14,22 +14,29 @@ const Search = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     if (!source || !destination || source === destination) return;
-    searchTrain(source, destination).then((result) => {
-      dispatch(setSearchResult(result.data));
-    }).catch(()=>{
-      alert('Not found any trains available in this root')
-    })
+    searchTrain(source, destination)
+      .then((result) => {
+        dispatch(setSearch({ source, destination }));
+        dispatch(setSearchResult(result.data));
+      })
+      .catch(() => {
+        alert("Not found any trains available in this root");
+      });
   };
 
   return (
     <form onSubmit={handleSearch}>
-      <div className="mt-10 flex sm:flex-row flex-col sm:gap-10">
+      <div className="mt-10 flex sm:flex-row flex-col gap-2 sm:gap-10">
         <DropdownList setState={setSource} placeholder={"Source"} />
-        <img src={Arrow} alt="To" className="h-10 w-10 object-cover sm:block hidden" />
+        <img
+          src={Arrow}
+          alt="To"
+          className="h-10 w-10 object-cover sm:block hidden"
+        />
         <DropdownList setState={setDestination} placeholder={"Destination"} />
         <button
           type="submit"
-          className="p-2 w-28 text-white rounded-sm bg-indigo"
+          className="p-2 w-full sm:w-28 text-white rounded-sm bg-indigo"
         >
           Search
         </button>
