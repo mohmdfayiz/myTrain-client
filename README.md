@@ -1,2 +1,3 @@
-# myTrain-client
-![Screenshot (319)](https://user-images.githubusercontent.com/90344973/229266464-4ce295aa-5f95-4f2b-b3f1-ab075ba2779b.png)
+## MyTrain- Plan your trip.
+
+![Screenshot (321)](https://user-images.githubusercontent.com/90344973/229333569-88c46c3f-a163-413c-976a-59b7cac17ec6.png)
