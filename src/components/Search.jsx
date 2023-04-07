@@ -20,7 +20,7 @@ const Search = () => {
         dispatch(setSearchResult(result.data));
       })
       .catch(() => {
-        alert("Not found any trains available in this root");
+        alert("Not found any trains available in this rout");
       });
   };
 

@@ -35,7 +35,7 @@ const TrainDetails = () => {
                       <tr key={route.stationNumber} className="border-b transition duration-300 ease-in-out hover:bg-gray-100">
                         <td className="px-6 py-4">{route.stationName}</td>
                         <td  className="text-center">{route.distanceFromPrevious}</td>
-                        <td  className="text-center">{dateFormat(route.departureTime, "HH:MM TT")}</td>
+                        <td  className="text-center">{dateFormat(route.departureTime, "HH:MM")}</td>
                       </tr>
                     ))}
                 </tbody>

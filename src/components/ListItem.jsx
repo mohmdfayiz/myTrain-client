@@ -10,14 +10,20 @@ const ListItem = ({ item }) => {
     dispatch(setShow());
   };
 
-  const calculateDistance = (route) => {
-    const sourceIndex = route.findIndex(
-      (route) => route.stationName === search.source
+  const calculateDistance = (routes) => {
+    const sourceIndex = routes.findIndex(
+      (route) =>
+        route.stationName ===
+        (search.source ? search.source : routes[0].stationName)
     );
-    const destinationIndex = route.findIndex(
-      (route) => route.stationName === search.destination
+    const destinationIndex = routes.findIndex(
+      (route) =>
+        route.stationName ===
+        (search.destination
+          ? search.destination
+          : routes[routes.length - 1].stationName)
     );
-    const distance = route
+    const distance = routes
       .slice(sourceIndex + 1, destinationIndex + 1)
       .reduce((acc, cur) => acc + cur.distanceFromPrevious, 0);
     return distance;
@@ -29,7 +35,9 @@ const ListItem = ({ item }) => {
       className="bg-white p-2 rounded-md hover:shadow-md cursor-pointer"
     >
       <div className="grid grid-cols-12 ">
-      <h2 className="text-gray-600 font-bold col-span-12 sm:col-span-3">{item.name}</h2>
+        <h2 className="text-gray-600 font-bold col-span-12 sm:col-span-3">
+          {item.name}
+        </h2>
         <div className="flex items-center gap-3 col-span-8 sm:col-span-5 text-sm sm:text-base">
           <p>{search?.source || item.route[0].stationName}</p>
           <img src={Arrow} alt="To" className="h-5 w-5" />
@@ -39,22 +47,10 @@ const ListItem = ({ item }) => {
           </p>
         </div>
         <p className="my-auto col-span-2 text-sm sm:text-base">
-          {search?.source
-            ? calculateDistance(item.route)
-            : item.route.reduce(
-                (acc, cur) => acc + cur.distanceFromPrevious,
-                0
-              )}{" "}
-          Kms
+          {calculateDistance(item.route)+ "  Kms"}
         </p>
         <p className="my-auto col-span-2  text-sm sm:text-base">
-          ₹{" "}
-          {search?.source
-            ? calculateDistance(item.route) * 1.25
-            : item.route.reduce(
-                (acc, cur) => acc + cur.distanceFromPrevious,
-                0
-              ) * 1.25}
+          {`₹ ${calculateDistance(item.route) * 1.25}`}
         </p>
       </div>
     </div>
